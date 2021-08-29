@@ -70,6 +70,7 @@ class Pose2D
         if(dir.y < 0 && y > ref.y) y = ref.y;
         if(dir.theta < 0 && theta > ref.theta) theta = ref.theta; 
     }
+    void set_timestamp(double time){time_stamp = time;}
     double x = 0;
     double y = 0;
     double theta = 0;
@@ -161,8 +162,8 @@ class PoseController
         pid_param_[1].bound.lower = -1.0;
         pid_param_[1].threshold.upper = 0.005;
         pid_param_[1].threshold.lower = -0.005;
-        pid_param_[1].kp = 1.5;
-        pid_param_[1].ki = 0.06;
+        pid_param_[1].kp = 2.0;
+        pid_param_[1].ki = 0.1;
         pid_param_[1].kd = 0.0;
         
         // for pose theta

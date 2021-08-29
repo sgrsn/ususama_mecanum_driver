@@ -54,63 +54,6 @@ void write_pc_thread()
         ThisThread::sleep_for(50);
     }
 }
-
-void control_test()
-{
-    bool is_way_generated = false;
-    ususama.ControllVelocity(Vel2D(0.0, 0.0, 0.0));
-    WaypointGenerator<Pose2D> way_generator( Pose2D(0, 0, 0), Pose2D(0, 0, 0), 10.0);
-    Timer t_way;
-    t_way.start();
-    Pose2D ref_poses[] = {Pose2D(0, 0, 0.00f), Pose2D(0, 0, 3.14f), Pose2D(0, 0, 3.00f)};
-    int i = 0;
-    while(1)
-    {
-        Pose2D ref_pose = ref_poses[i%3];
-        printf("%d\r\n", (int)(pmsu.GetYawRadians() * RAD_TO_DEG));
-        ususama.ComputePose();
-        ususama.ControllVelocity(Vel2D(0,0,0.008));
-        /*if(!is_way_generated)
-        {
-            // 0.5m/sとする
-            // +0.8rad/s 
-            //double time_required = (abs(ref_pose.x-ususama.GetPose().x) + abs(ref_pose.y-ususama.GetPose().y))/0.5;
-            //time_required += abs(ref_pose.theta-ususama.GetPose().theta)/0.8;
-            way_generator = WaypointGenerator<Pose2D>(
-                ususama.GetPose(), 
-                ref_pose, 
-                1
-            );
-            is_way_generated = true;
-            commander.notify_use_ref_pose();
-            t_way.reset();
-            t_way.start();
-        }
-        // waypoint存在していれば移動
-        else
-        {
-            float t = t_way.read();
-            ususama.ControlPosition( way_generator.GetPose( t ) );
-            is_way_generated = true;
-        }
-        
-        if( ususama.IsReferencePose( ref_pose ) )
-        {
-            is_way_generated = false;
-            ususama.PauseControl();
-            i++;
-        }
-        // タイムアウトでゴールとする
-        // over duration_time + 10 sec
-        else if(t_way.read() > (way_generator.get_duration_time()+10))
-        {
-            is_way_generated = false;
-            ususama.PauseControl();
-            i++;
-        }*/
-    }
-}
-
 int main()
 {
     //std::list<std::unique_ptr<Pose2D>> ref_pose_list;
